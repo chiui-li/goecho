@@ -34,7 +34,7 @@ jobs:
           go build -o dist/goecho-${{ matrix.os }}-${{ matrix.arch }} ./main.go
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: goecho-${{ matrix.os }}-${{ matrix.arch }}
           path: dist/goecho-${{ matrix.os }}-${{ matrix.arch }}
