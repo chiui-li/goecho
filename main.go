@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"net"
+	"os"
 	"time"
 )
 
@@ -40,11 +41,16 @@ func handleConn(conn net.Conn) {
 }
 
 func main() {
-	server, err := net.Listen("tcp", ":8081")
+	if len(os.Args) < 2 {
+		fmt.Println("please provide a port number, for example: \ngoecho 8080")
+		return
+	}
+	server, err := net.Listen("tcp", ":"+os.Args[1])
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
+	log.Println("goecho server started on 0.0.0.0:" + os.Args[1])
 	for {
 		conn, _ := server.Accept()
 		go handleConn(conn)
